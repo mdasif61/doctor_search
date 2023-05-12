@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "Telemedicine Services",
+        "description": "Our doctors offer virtual consultations and remote healthcare services, so you can get the care you need from the comfort of your own home.",
+        "image": "https://i.ibb.co/kBjdV4m/8102591.png"
+      },
+      {
+        "id": 2,
+        "title": "Preventative Care",
+        "description": "From routine check-ups to health screenings, our doctors provide comprehensive preventative care to help you stay healthy and catch potential health issues early.",
+        "image": "https://i.ibb.co/87vG5fd/2184904.png"
+      },
+      {
+        "id": 3,
+        "title": "Chronic Disease Management",
+        "description": "If you're living with a chronic condition, our doctors can help you manage your symptoms and improve your quality of life with personalized care and treatment plans.",
+        "image": "https://i.ibb.co/hVLrbNw/7850975.png"
+      },
+      {
+        "id": 4,
+        "title": "Women's Health Services",
+        "description": "Our doctors offer a range of specialized healthcare services for women, including gynecological exams, pregnancy care, and menopause management.",
+        "image": "https://i.ibb.co/B6dSTHP/3401403.png"
+      }
+]

@@ -33,25 +33,25 @@ const Register = () => {
             </div>
 
             <div className="w-full">
-              <label htmlFor="name">Email</label>
+              <label htmlFor="email">Email</label>
               <br />
               <input
                 className="w-full mt-1 h-12 py-2 px-4 focus:outline-none focus:border-b-2 focus:border-blue-500 bg-gray-200 mb-3"
-                type="text"
-                name="name"
-                placeholder="Enter Your Name"
+                type="email"
+                name="email"
+                placeholder="Enter Your Email"
                 id=""
               />
             </div>
 
             <div className="w-full">
-              <label htmlFor="name">Password</label>
+              <label htmlFor="password">Password</label>
               <br />
               <input
                 className="w-full mt-1 h-12 py-2 px-4 focus:outline-none focus:border-b-2 focus:border-blue-500 bg-gray-200 mb-3"
-                type="text"
-                name="name"
-                placeholder="Enter Your Name"
+                type="password"
+                name="password"
+                placeholder="Enter Your Password"
                 id=""
               />
             </div>

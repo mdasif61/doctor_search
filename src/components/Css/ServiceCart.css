@@ -1,0 +1,16 @@
+/* .blueBg::after{
+    content: '';
+    background-color: blue;
+    position: absolute;
+    top:0;
+    left: 0;
+} */
+.blueBg::before {
+  content: "";
+  background-color: rgb(118, 118, 255);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 92px;
+}

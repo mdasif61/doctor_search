@@ -1,0 +1,29 @@
+.banner {
+  background-image: url("../../assets/detailsBanner.jpg"),
+    radial-gradient(rgb(173, 251, 253), rgb(0, 0, 0) 170%);
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+}
+
+.animImg {
+  animation: anim 0.3s alternate 3s 1;
+  transition: all;
+}
+@keyframes anim {
+  0% {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-0px);
+  }
+}
+
+.price {
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+}

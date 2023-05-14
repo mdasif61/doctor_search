@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MyBooking = () => {
     const {user}=useContext(AuthContext);
-    const [booked,setBooked]=useState([])
+    const [booked,setBooked]=useState([]);
+    const [updated,setUpdated]=useState({})
     useEffect(()=>{
         fetch(`http://localhost:5000/bookings?email=${user.email}`)
         .then(res=>res.json())
@@ -22,6 +23,27 @@ const MyBooking = () => {
             if(data.deletedCount>0){
                 const remain=booked.filter(book=>book._id!==id);
                 setBooked(remain)
+            }
+        })
+    };
+
+    const handleUpdate=(id)=>{
+        fetch(`http://localhost:5000/bookings/${id}`,{
+            method:'PATCH',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify({status:'confirm'})
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.modifiedCount>0){
+                const remain=booked.filter(book=>book._id!==id)
+                const update=booked.find(book=>book._id===id);
+                update.status='Applyed';
+                setUpdated(update)
+                const newBooked=[update,...remain];
+                setBooked(newBooked)
             }
         })
     }
@@ -60,7 +82,11 @@ const MyBooking = () => {
                                 <td className="text-center">
                                     <button onClick={()=>handleDelete(book._id)} className="btn mx-2 btn-circle bg-red-200 border-none hover:bg-red-200"><FontAwesomeIcon className="text-red-600 text-lg" icon={faTrash}/></button>
 
-                                    <button className="btn mx-2 bg-blue-200 border-none hover:bg-blue-200"><FontAwesomeIcon className="text-blue-600 text-lg" icon={faPenToSquare}/></button>
+                                    {updated.status==='Applyed'?<><button disabled className="font-semibold mx-2 btn btn-primary">Applyed</button></>
+                                    :
+                                    <>
+                                    <button onClick={()=>handleUpdate(book._id)}className="font-semibold mx-2 btn btn-primary">Apply</button>
+                                    </>}
                                 </td>
                             </tr>)
                         }

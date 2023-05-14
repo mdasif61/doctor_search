@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../../assets/google.png";
 import github from "../../assets/github.png";
 import facebook from "../../assets/facebook.png";
@@ -9,8 +9,9 @@ import { AuthContext } from "../shared/AuthProvider";
 
 const Register = () => {
 
-  const {createUser,googleLogin}=useContext(AuthContext);
+  const {createUser,googleLogin,logOut}=useContext(AuthContext);
   const [condition,setCondition]=useState(false)
+  const navigate=useNavigate()
 
   const handleRegister=(event)=>{
     event.preventDefault();
@@ -24,6 +25,14 @@ const Register = () => {
     .then(result=>{
       const user=result.user;
       console.log(user)
+      logOut()
+      .then(result=>{
+        console.log(result)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+      navigate('/login')
     })
     .catch(error=>{
       console.log(error)
@@ -38,6 +47,14 @@ const Register = () => {
     googleLogin()
     .then(result=>{
       console.log(result)
+      logOut()
+      .then(result=>{
+        console.log(result)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+      navigate('/login')
     })
     .catch(error=>{
       console.log(error)

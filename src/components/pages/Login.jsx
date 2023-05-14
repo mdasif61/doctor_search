@@ -5,10 +5,14 @@ import render from "../../../public/login.json";
 import Lottie from "lottie-react";
 import { useContext } from "react";
 import { AuthContext} from "../shared/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-  const {signIn,gender}=useContext(AuthContext)
+  const {signIn,googleLogin}=useContext(AuthContext)
+  const navigate=useNavigate()
+  const location=useLocation();
+  const from=location.state?.from?.pathname || '/'
 
   const handleLogin=(event)=>{
     event.preventDefault();
@@ -21,11 +25,23 @@ const Login = () => {
     .then(result=>{
       const user=result.user
      console.log(user)
+      navigate(from)
     })
     .catch(error=>{
       console.log(error)
     })
 
+  }
+
+  const handleGoogleLogin=()=>{
+    googleLogin()
+    .then(result=>{
+      console.log(result)
+      navigate(from)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
   }
 
   return (
@@ -72,7 +88,7 @@ const Login = () => {
           </form>
           <div className="divider my-7">OR</div>
           <div className="flex mt-5 items-center justify-center w-full">
-            <div className="mx-2 bg-gray-100 border border-gray-300 p-3 rounded-full">
+            <div onClick={handleGoogleLogin} className="mx-2 bg-gray-100 border border-gray-300 p-3 rounded-full">
               <img className="w-5" src={google} alt="" />
             </div>
             <div className="mx-2 bg-gray-100 border border-gray-300 p-3 rounded-full">

@@ -14,6 +14,8 @@ import MyBooking from "./components/pages/MyBooking";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import LoginLayout from "./components/pages/LoginLayout";
+import AuthProvider from "./components/shared/AuthProvider";
+import PrivateRoute from "./components/shared/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/booking/:id',
-        element:<Booking></Booking>
+        element:<PrivateRoute><Booking></Booking></PrivateRoute>
       },
       {
         path:'/details/:id',
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/mybooking/:id',
-        element:<MyBooking></MyBooking>,
+        element:<PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
       }
     ]
   },
@@ -63,7 +65,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div className='max-w-7xl mx-auto p-7'>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
     </div>
   </React.StrictMode>
 );

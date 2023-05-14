@@ -4,8 +4,46 @@ import github from "../../assets/github.png";
 import facebook from "../../assets/facebook.png";
 import render from "../../../public/login.json";
 import Lottie from "lottie-react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../shared/AuthProvider";
 
 const Register = () => {
+
+  const {createUser,googleLogin}=useContext(AuthContext);
+  const [condition,setCondition]=useState(false)
+
+  const handleRegister=(event)=>{
+    event.preventDefault();
+    const form=event.target;
+    const name=form.name.value;
+    const email=form.email.value;
+    const password=form.password.value;
+    const gender=form.gender.value;
+    
+    createUser(email,password)
+    .then(result=>{
+      const user=result.user;
+      console.log(user)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+
+  }
+  const handleCheck=(event)=>{
+    setCondition(event.target.checked)
+  }
+
+  const handleGoogleLogin=()=>{
+    googleLogin()
+    .then(result=>{
+      console.log(result)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full flex">
@@ -19,7 +57,7 @@ const Register = () => {
           <h1 className="text-center mb-3 font-bold text-2xl">
             Register Please
           </h1>
-          <form className="w-full">
+          <form onSubmit={handleRegister} className="w-full">
             <div className="w-full">
               <label htmlFor="name">Name</label>
               <br />
@@ -82,7 +120,7 @@ const Register = () => {
               </label>
             </div>
             <div className="w-full mt-4">
-              <input type="checkbox" name="trems" id="" />
+              <input onClick={handleCheck} type="checkbox" name="trems" id="" />
               <label htmlFor="trems">
                 <span className="ml-1">
                   Accept{" "}
@@ -93,6 +131,7 @@ const Register = () => {
               </label>
             </div>
             <input
+              disabled={!condition}
               className="btn btn-block btn-primary mt-5"
               type="submit"
               value="REGISTER"
@@ -100,7 +139,7 @@ const Register = () => {
           </form>
           <div className="divider my-7">OR</div>
           <div className="flex mt-5 items-center justify-center w-full">
-            <div className="mx-2 bg-gray-100 border border-gray-300 p-3 rounded-full">
+            <div onClick={handleGoogleLogin} className="mx-2 bg-gray-100 border border-gray-300 p-3 rounded-full">
               <img className="w-5" src={google} alt="" />
             </div>
             <div className="mx-2 bg-gray-100 border border-gray-300 p-3 rounded-full">

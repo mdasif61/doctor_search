@@ -1,11 +1,33 @@
-import { Link } from "react-router-dom";
 import google from "../../assets/google.png";
 import github from "../../assets/github.png";
 import facebook from "../../assets/facebook.png";
 import render from "../../../public/login.json";
 import Lottie from "lottie-react";
+import { useContext } from "react";
+import { AuthContext} from "../shared/AuthProvider";
 
 const Login = () => {
+
+  const {signIn,gender}=useContext(AuthContext)
+
+  const handleLogin=(event)=>{
+    event.preventDefault();
+    const form=event.target;
+    const email=form.email.value;
+    const password=form.password.value;
+    console.log(email,password)
+
+    signIn(email,password)
+    .then(result=>{
+      const user=result.user
+     console.log(user)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full flex">
@@ -17,7 +39,7 @@ const Login = () => {
         {/* register form start */}
         <div className="w-[50%] p-10 ">
           <h1 className="text-center mb-3 font-bold text-2xl">Login Please</h1>
-          <form className="w-full">
+          <form onSubmit={handleLogin} className="w-full">
             <div className="w-full">
               <label htmlFor="email">Email</label>
               <br />

@@ -12,6 +12,7 @@ const ServiceCart = ({ service }) => {
     _id,
   } = service;
   return (
+    <>
     <div className="bg-gray-100 border p-7 flex items-center relative">
       <span className="blueBg "></span>
       <div className="bg-white shadow-xl z-30 p-1 w-32 rounded-full">
@@ -33,6 +34,7 @@ const ServiceCart = ({ service }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

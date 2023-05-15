@@ -153,6 +153,7 @@ const Register = () => {
               type="submit"
               value="REGISTER"
             />
+            <p className="mt-3">Already Have An Account?<Link to='/login' className="text-blue-500 underline">Login</Link></p>
           </form>
           <div className="divider my-7">OR</div>
           <div className="flex mt-5 items-center justify-center w-full">

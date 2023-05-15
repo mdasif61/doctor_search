@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../shared/AuthProvider";
-import {faTrash, faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 const MyBooking = () => {
     const {user}=useContext(AuthContext);
     const [booked,setBooked]=useState([]);
+    const navigate=useNavigate()
     // const [updated,setUpdated]=useState({})
     useEffect(()=>{
         fetch(`http://localhost:5000/bookings?email=${user.email}`,{
@@ -15,9 +17,15 @@ const MyBooking = () => {
             }
         })
         .then(res=>res.json())
-        .then(data=>setBooked(data))
+        .then(data=>{
+            if(!data.error){
+                setBooked(data)
+            }else{
+                navigate('/login')
+            }
+        })
 
-    },[user.email])
+    },[navigate,user.email])
 
     const handleDelete=(id)=>{
         fetch(`http://localhost:5000/bookings/${id}`,{

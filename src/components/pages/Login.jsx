@@ -5,7 +5,7 @@ import render from "../../../public/login.json";
 import Lottie from "lottie-react";
 import { useContext } from "react";
 import { AuthContext} from "../shared/AuthProvider";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -13,19 +13,17 @@ const Login = () => {
   const navigate=useNavigate()
   const location=useLocation();
   const from=location.state?.from?.pathname || '/'
+  console.log(from)
 
   const handleLogin=(event)=>{
     event.preventDefault();
     const form=event.target;
     const email=form.email.value;
     const password=form.password.value;
-    console.log(email,password)
 
     signIn(email,password)
     .then(result=>{
-      const user=result.user
-     console.log(user)
-      navigate(from)
+      navigate(from, { replace: true })
     })
     .catch(error=>{
       console.log(error)
@@ -36,8 +34,7 @@ const Login = () => {
   const handleGoogleLogin=()=>{
     googleLogin()
     .then(result=>{
-      console.log(result)
-      navigate(from)
+      navigate(from, { replace: true })
     })
     .catch(error=>{
       console.log(error)
@@ -85,6 +82,7 @@ const Login = () => {
               type="submit"
               value="LOGIN"
             />
+             <p className="mt-3">Are Your New?<Link to='/register' className="text-blue-500 underline">Register</Link></p>
           </form>
           <div className="divider my-7">OR</div>
           <div className="flex mt-5 items-center justify-center w-full">

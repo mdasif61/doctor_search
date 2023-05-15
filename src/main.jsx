@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       {
         path:'/service',
         element:<Services></Services>,
-        loader:()=>fetch('http://localhost:5000/service')
+        loader:()=>fetch('http://localhost:5000/totalService')
       },
       {
         path:'/booking/:id',

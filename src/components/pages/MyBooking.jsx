@@ -6,9 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const MyBooking = () => {
     const {user}=useContext(AuthContext);
     const [booked,setBooked]=useState([]);
-    const [updated,setUpdated]=useState({})
+    // const [updated,setUpdated]=useState({})
     useEffect(()=>{
-        fetch(`http://localhost:5000/bookings?email=${user.email}`)
+        fetch(`http://localhost:5000/bookings?email=${user.email}`,{
+            method:'GET',
+            headers:{
+                authorization:`Bearer ${localStorage.getItem('access_token')}`
+            }
+        })
         .then(res=>res.json())
         .then(data=>setBooked(data))
 
@@ -40,8 +45,8 @@ const MyBooking = () => {
             if(data.modifiedCount>0){
                 const remain=booked.filter(book=>book._id!==id)
                 const update=booked.find(book=>book._id===id);
-                update.status='Applyed';
-                setUpdated(update)
+                update.status='confirm';
+                // setUpdated(update)
                 const newBooked=[update,...remain];
                 setBooked(newBooked)
             }
@@ -82,7 +87,7 @@ const MyBooking = () => {
                                 <td className="text-center">
                                     <button onClick={()=>handleDelete(book._id)} className="btn mx-2 btn-circle bg-red-200 border-none hover:bg-red-200"><FontAwesomeIcon className="text-red-600 text-lg" icon={faTrash}/></button>
 
-                                    {updated.status==='Applyed'?<><button disabled className="font-semibold mx-2 btn btn-primary">Applyed</button></>
+                                    {book.status==='confirm'?<><span className="font-semibold mx-2">Applyed</span></>
                                     :
                                     <>
                                     <button onClick={()=>handleUpdate(book._id)}className="font-semibold mx-2 btn btn-primary">Apply</button>

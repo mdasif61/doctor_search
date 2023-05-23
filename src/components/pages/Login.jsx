@@ -8,11 +8,11 @@ import { AuthContext} from "../shared/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const {signIn,googleLogin}=useContext(AuthContext)
   const navigate=useNavigate()
   const location=useLocation();
-  const from=location.state?.from?.pathname || '/'
+  const from=location.state?.from?.pathname || '/';
+  console.log(location)
   console.log(from)
 
   const handleLogin=(event)=>{

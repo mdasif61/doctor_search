@@ -16,6 +16,9 @@ import Register from "./components/pages/Register";
 import LoginLayout from "./components/pages/LoginLayout";
 import AuthProvider from "./components/shared/AuthProvider";
 import PrivateRoute from "./components/shared/PrivateRoute";
+import AddService from "./components/pages/AddService";
+import MyServices from "./components/pages/MyServices";
+import LoaderPage from "./components/pages/LoaderPage";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/service',
-        element:<Services></Services>,
+        element:<LoaderPage><Services></Services></LoaderPage>,
         loader:()=>fetch('http://localhost:5000/totalService')
       },
       {
@@ -43,6 +46,14 @@ const router = createBrowserRouter([
       {
         path:'/mybooking',
         element:<PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
+      },
+      {
+        path:'/addService',
+        element:<AddService></AddService>
+      },
+      {
+        path:'/myservices',
+        element:<LoaderPage><MyServices></MyServices></LoaderPage>
       }
     ]
   },

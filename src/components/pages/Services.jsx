@@ -1,9 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 import ServiceCart from "./ServiceCart";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../shared/AuthProvider";
 
 const Services = () => {
-  
+  const {user}=useContext(AuthContext)
   const [services,setServices]=useState([]);
   const [currentPage,setCurrentPage]=useState(0);
   const [itemPerPage,setItemPerPage]=useState(2);
@@ -20,7 +21,7 @@ const Services = () => {
        setServices(data)
     }
     fetchData()
-  },[currentPage,itemPerPage])
+  },[currentPage,itemPerPage,user])
 
   const options=[2,3,4,5,6];
   const handleChangeValue=event=>{

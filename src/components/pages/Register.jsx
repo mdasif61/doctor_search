@@ -9,7 +9,7 @@ import { AuthContext } from "../shared/AuthProvider";
 
 const Register = () => {
 
-  const {createUser,googleLogin,logOut}=useContext(AuthContext);
+  const {createUser,googleLogin,logOut,updateUser}=useContext(AuthContext);
   const [condition,setCondition]=useState(false)
   const navigate=useNavigate()
 
@@ -24,6 +24,13 @@ const Register = () => {
     createUser(email,password)
     .then(result=>{
       const user=result.user;
+      updateUser(user,name)
+      .then(result=>{
+        // console.log(result)
+      })
+      .catch(error=>{
+        // console.log(error)
+      })
       console.log(user)
       logOut()
       .then(result=>{
@@ -62,7 +69,7 @@ const Register = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center p-40 justify-center min-h-screen">
       <div className="w-full flex">
         {/* animation */}
         <div className="w-[50%] p-16">

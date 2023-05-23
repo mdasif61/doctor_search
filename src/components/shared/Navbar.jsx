@@ -107,13 +107,26 @@ const Navbar = () => {
         </>
       }
       {
-        manu && user && <><div className='absolute flex flex-col right-0 top-20 bg-blue-900 rounded-box w-44 p-7 text-white'>
+        manu && user && <><div className='absolute flex flex-col right-0 top-20 bg-blue-950 rounded-box w-56 py-7 px-3 text-white'>
         <div className="w-20 overflow-hidden h-20  mb-3 rounded-full bg-blue-200">
           <img className="rounded-full border-8 border-gray-800" src={user.photoURL} alt="" />
         </div>
+
+        <div>
+        <h1 className="font-semibold text-sm">User : {user.displayName}</h1>
+        <h2 className="font-semibold text-sm">ID :</h2>
+        </div>
+
+        <div className="w-full mt-5 bg-black p-2 bg-opacity-40 rounded-xl">
+        <p className="text-white py-1 rounded-md font-bold hover:bg-gray-700 my-2 px-2"><Link to='/'>Home</Link></p>
+
+        <p className="text-white py-1 rounded-md font-bold hover:bg-gray-700 my-2 px-2"><Link to='/addService'>Add Services</Link></p>
+
+        <p className="text-white py-1 rounded-md font-bold hover:bg-gray-700 my-2 px-2"><Link to='/myservices'>My Services</Link></p>
+
+        <p className="text-white py-1 rounded-md font-bold hover:bg-gray-700 my-2 px-2"><Link to='/addService'>Profile</Link></p>
+        </div>
         <div className="mt-3">
-          <h1 className="font-semibold text-sm">User : {user.displayName}</h1>
-          <h2 className="font-semibold text-sm">ID :</h2>
           <button onClick={handleLogout} className="btn btn-warning mt-4">Log Out</button>
         </div>
       </div></>
